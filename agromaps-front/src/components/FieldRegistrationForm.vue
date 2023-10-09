@@ -2,7 +2,7 @@
   <div class="header">
     <div>
       <p>Select a map section and click on its intended center</p>
-      <div>
+      <div v-if="online">
         <yandex-map ymap-class="map"
                     zoom="15"
                     :coords="coords"
@@ -18,6 +18,9 @@
               :balloon-template="balloonTemplate"
           ></ymap-marker>
         </yandex-map>
+      </div>
+      <div v-else>
+        <p>No connection</p>
       </div>
     </div>
     <div>
@@ -54,11 +57,21 @@ export default {
   data() {
     return {
       coords: [52.477137, 24.738898],
+      online: navigator.onLine,
     };
   },
   computed: {
     balloonTemplate() {
       return `<p>${this.coords}</p>`
+    }
+  },
+  watch: {
+    online(v) {
+      if (v) {
+        this.onLine = navigator.onLine;
+      } else {
+        this.online = navigator.onLine;
+      }
     }
   },
   methods: {

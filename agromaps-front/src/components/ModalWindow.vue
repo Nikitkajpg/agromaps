@@ -34,8 +34,8 @@ export default {
 
 .modal {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 25%;
+  left: 25%;
   background: #fff;
 }
 </style>
