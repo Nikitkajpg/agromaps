@@ -1,6 +1,26 @@
 <template>
   <div class="header">
     <div>
+      <p>Select a map section and click on its intended center</p>
+      <div>
+        <yandex-map ymap-class="map"
+                    zoom="15"
+                    :coords="coords"
+                    map-type="hybrid"
+                    @click.self="onClick"
+                    :controls="['zoomControl', 'geolocationControl', 'searchControl']"
+                    :options="{ suppressMapOpenBlock: true }"
+                    alt="no"
+        >
+          <ymap-marker
+              :coords="coords"
+              marker-id="123"
+              :balloon-template="balloonTemplate"
+          ></ymap-marker>
+        </yandex-map>
+      </div>
+    </div>
+    <div>
       <p>Land map</p>
       <img src="https://static-maps.yandex.ru/1.x/?ll=23.282781,52.378432&z=14&l=sat&size=450,450" alt="No connection">
     </div>
@@ -9,7 +29,7 @@
       <button @click="increase" class="increase-button">Increase</button>
     </div>
     <div>
-      <p>Paint required area of land (current land may not match the view on the map)</p>
+      <p class="paint-text">Paint required area of land (current land may not match the view on the map)</p>
       <button @click="startPainting">Paint</button>
       <button @click="clearArea">Clear</button>
     </div>
@@ -26,9 +46,25 @@
 </template>
 
 <script>
+import {yandexMap, ymapMarker} from "vue-yandex-maps";
+
 export default {
   name: "field-registration-form",
+  components: {yandexMap, ymapMarker},
+  data() {
+    return {
+      coords: [52.477137, 24.738898],
+    };
+  },
+  computed: {
+    balloonTemplate() {
+      return `<p>${this.coords}</p>`
+    }
+  },
   methods: {
+    onClick(event) {
+      this.coords = event.get('coords');
+    },
     confirm() {
       //todo
       this.closeModal();
@@ -56,6 +92,17 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
+.header {
+  display: flex;
+}
 
+.map {
+  width: 600px;
+  height: 600px;
+}
+
+.paint-text {
+  width: 200px;
+}
 </style>
