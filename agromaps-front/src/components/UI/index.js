@@ -1,9 +1,9 @@
-// import MyButton from "@/components/UI/MyButton";
-// import MyDialog from "@/components/UI/MyDialog";
-// import MyInput from "@/components/UI/MyInput";
-//
-// export default [
-//     MyButton,
-//     MyDialog,
-//     MyInput
-// ]
+import ModalWindow from "@/components/UI/ModalWindow";
+import DefaultInput from "@/components/UI/DefaultInput";
+import DefaultButton from "@/components/UI/DefaultButton";
+
+export default [
+    ModalWindow,
+    DefaultInput,
+    DefaultButton,
+]

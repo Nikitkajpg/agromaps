@@ -1,6 +1,6 @@
 <template>
-  <div v-if="show" @click.self="closeModal" class="modal-shadow">
-    <div class="modal">
+  <div v-if="show" @click.stop="closeModal" class="modal-shadow">
+    <div @click.stop class="modal">
       <slot/>
     </div>
   </div>
@@ -9,14 +9,15 @@
 <script>
 export default {
   name: "modal-window",
-  data() {
-    return {
-      show: false,
+  props: {
+    show: {
+      type: Boolean,
+      default: false,
     }
   },
   methods: {
     closeModal() {
-      this.show = false;
+      this.$emit('update:show', false);
     },
   },
 }

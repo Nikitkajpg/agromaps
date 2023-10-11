@@ -23,41 +23,50 @@
         <p>No connection</p>
       </div>
     </div>
-    <div>
+    <div class="outside-wrapper">
       <p>Land map</p>
-      <img src="https://static-maps.yandex.ru/1.x/?ll=23.282781,52.378432&z=14&l=sat&size=450,450" alt="No connection">
+      <!--      <div class="outside-wrapper">-->
+      <div class="inside-wrapper">
+        <img :src="imageSrc" alt="No connection" class="image">
+        <canvas-component/>
+      </div>
+      <!--      </div>-->
     </div>
     <div>
-      <button @click="decrease" class="decrease-button">Decrease</button>
-      <button @click="increase" class="increase-button">Increase</button>
+      <default-button @click="decrease">Decrease</default-button>
+      <default-button @click="increase">Increase</default-button>
     </div>
     <div>
       <p class="paint-text">Paint required area of land (current land may not match the view on the map)</p>
-      <button @click="startPainting">Paint</button>
-      <button @click="clearArea">Clear</button>
+      <default-button @click="startPainting">Paint</default-button>
+      <default-button @click="clearArea">Clear</default-button>
     </div>
   </div>
   <div class="parameters">
-    <input type="text" placeholder="Name">
-    <input type="text" placeholder="Parameter to measure">
-    <button @click="chooseData" class="button">Choose measurement data</button>
+    <default-input placeholder="Name"/>
+    <default-input placeholder="Parameter to measure"/>
+    <default-button @click="chooseData">Choose measurement data</default-button>
   </div>
   <div class="footer">
-    <button @click="closeModal" class="button">Cancel</button>
-    <button @click="confirm" class="button">Confirm</button>
+    <default-button @click="closeModal">Cancel</default-button>
+    <button @click="confirm">Confirm</button>
   </div>
 </template>
 
 <script>
 import {yandexMap, ymapMarker} from "vue-yandex-maps";
+import DefaultButton from "@/components/UI/DefaultButton";
+import DefaultInput from "@/components/UI/DefaultInput";
+import CanvasComponent from "@/components/CanvasComponent";
 
 export default {
   name: "field-registration-form",
-  components: {yandexMap, ymapMarker},
+  components: {CanvasComponent, DefaultInput, DefaultButton, yandexMap, ymapMarker},
   data() {
     return {
       coords: [52.477137, 24.738898],
       online: navigator.onLine,
+      imageSrc: 'https://static-maps.yandex.ru/1.x/?ll=23.282781,52.378432&z=14&l=sat&size=450,450',
     };
   },
   computed: {
@@ -115,7 +124,22 @@ export default {
   height: 600px;
 }
 
-.paint-text {
-  width: 200px;
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
+
+.inside-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/*.outside-wrapper {*/
+/*  width:125px;*/
+/*  height:125px;*/
+/*  margin:20px 60px;*/
+/*  border:1px solid blue;*/
+/*}*/
 </style>
