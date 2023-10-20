@@ -23,6 +23,9 @@
         <p>No connection</p>
       </div>
     </div>
+<!--    <a id="download" download="triangle.png">
+      <button type="button" @click="download">Download</button>
+    </a>-->
     <div class="outside-wrapper">
       <p>Land map</p>
       <!--      <div class="outside-wrapper">-->
@@ -67,6 +70,7 @@ export default {
       coords: [52.477137, 24.738898],
       online: navigator.onLine,
       imageSrc: 'https://static-maps.yandex.ru/1.x/?ll=23.282781,52.378432&z=14&l=sat&size=450,450',
+      base64textString: '',
     };
   },
   computed: {
@@ -84,6 +88,22 @@ export default {
     }
   },
   methods: {
+    /*download() {
+      const download = document.getElementById("download");
+      const image = document.getElementById("canvas").toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+      download.setAttribute("href", image);
+
+      const file = image;
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.base64textString = reader.result;
+      };
+      reader.onerror = (error) => {
+        console.log('Error: ', error);
+      };
+    },*/
     onClick(event) {
       this.coords = event.get('coords');
     },
@@ -107,7 +127,7 @@ export default {
       //todo
     },
     closeModal() {
-      //todo
+      this.$emit('create',)
     }
   }
 }

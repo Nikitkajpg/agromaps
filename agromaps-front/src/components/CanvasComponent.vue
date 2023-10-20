@@ -14,8 +14,6 @@ export default {
     }
   },
   mounted() {
-    // const canvas = this.$refs.canvas;
-    // const ctx = canvas.getContext("2d");
     const c = document.getElementById('canvas');
     c.width = 450;
     c.height = 450;

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <my-user/>
+    <field-list/>
     <button @click="showModal" class="show-modal-button">Register land</button>
     <modal-window v-model:show="windowVisible">
       <field-registration-form @create="createField"/>
@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import MyUser from "@/components/MyUser";
 import ModalWindow from "@/components/UI/ModalWindow";
 import FieldRegistrationForm from "@/components/FieldRegistrationForm";
+import FieldList from "@/components/FieldList";
 
 export default {
   components: {
+    FieldList,
     FieldRegistrationForm,
     ModalWindow,
-    MyUser,
   },
   data() {
     return {
@@ -36,5 +36,9 @@ export default {
 </script>
 
 <style>
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 </style>
